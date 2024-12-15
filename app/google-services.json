@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "272269861847",
+    "firebase_url": "https://elysium-57f98-default-rtdb.firebaseio.com",
+    "project_id": "elysium-57f98",
+    "storage_bucket": "elysium-57f98.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:272269861847:android:51b9169f3e1a7cdb572192",
+        "android_client_info": {
+          "package_name": "com.example.myapplication"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBmWAFF1pJXyBANhRe-317fZvkR6NsoH7Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,68 @@
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="16dp"
+    android:padding="16dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="8dp"
+    android:backgroundTint="@android:color/white">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- Report Title -->
+        <TextView
+            android:id="@+id/tvReportTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/report_title"
+            android:textSize="20sp"
+            android:textColor="@color/primary_text_color"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp" />
+
+        <!-- Report Description -->
+        <TextView
+            android:id="@+id/tvReportDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/report_description"
+            android:textSize="16sp"
+            android:textColor="@color/secondary_text_color"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Report Location -->
+        <TextView
+            android:id="@+id/tvReportLocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/report_location"
+            android:textSize="14sp"
+            android:textColor="@color/tertiary_text_color"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Report Image -->
+        <ImageView
+            android:id="@+id/ivReportImage"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:contentDescription="@string/report_image_description"
+            android:scaleType="centerCrop"
+            android:layout_marginBottom="12dp"
+            android:visibility="gone" />
+
+        <!-- Optional Button to View Details or Other Actions -->
+        <Button
+            android:id="@+id/btnViewReportDetails"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/view_details"
+            android:textColor="@android:color/white"
+            android:backgroundTint="@color/button_background_color"
+            android:fontFamily="sans-serif-medium"
+            android:layout_marginTop="12dp" />
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

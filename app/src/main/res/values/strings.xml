@@ -1,0 +1,44 @@
+<resources>
+    <string name="app_name">Elysium</string>
+    <string name="enter_description">Enter Description</string>
+    <string name="some_button">Some Button</string>
+    <string name="image_preview_content_description">Image Preview</string>
+    <string name="report_title">Report Title</string>
+    <string name="report_description">Report Description</string>
+    <string name="report_location">Location</string>
+    <string name="report_image_description">Image of the report</string>
+    <string name="no_reports_available">No reports available</string>
+    <string name="add_report">Add Report</string>
+    <string name="report_title_hint">Enter Report Title</string>
+    <string name="report_description_hint">Enter Report Description</string>
+    <string name="get_location">Get Location</string>
+    <string name="upload_image">Upload Image</string>
+    <string name="submit_report">Submit Report</string>
+    <string name="image_preview">Image Preview</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="email_hint">Enter Email</string>
+    <string name="password_hint">Enter Password</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="description">Description</string>
+    <string name="deforestation_reports">Deforestation Reports</string>
+    <string name="track_and_report_deforestation">Track and report deforestation activities</string>
+    <string name="report_deforestation">Report Deforestation</string>
+    <string name="report_submission">Submit Deforestation Report</string>
+    <string name="view_details">View Details</string>
+
+
+
+
+
+
+
+</resources>
