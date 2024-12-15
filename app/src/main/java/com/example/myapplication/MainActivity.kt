@@ -1,26 +1,26 @@
 package com.example.myapplication
 
+import Report
 import android.content.Intent
 import android.os.Bundle
 import android.os.StrictMode
 import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.databinding.ActivityMainBinding
 import com.google.firebase.BuildConfig
 import com.google.firebase.FirebaseApp
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var database: DatabaseReference
+    private val firestore = Firebase.firestore
     private lateinit var reportList: MutableList<Report>
     private lateinit var adapter: ReportAdapter
     private lateinit var binding: ActivityMainBinding
@@ -61,7 +61,7 @@ class MainActivity : AppCompatActivity() {
 
         // Initialize report list and adapter
         reportList = mutableListOf()
-        database = FirebaseDatabase.getInstance().getReference("Reports")
+        database = FirebaseDatabase.getInstance().getReference("reports")
         adapter = ReportAdapter(reportList)
 
         // Setup RecyclerView
@@ -82,38 +82,38 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun fetchReports() {
-        database.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                val newReportList = snapshot.children.mapNotNull { it.getValue(Report::class.java) }
+        firestore.collection("reports")
+            .addSnapshotListener { snapshot, e ->
+                if (e != null) {
+                    Log.e("FetchReports", "Firestore error: ${e.message}")
+                    return@addSnapshotListener
+                }
 
-                val diffResult = DiffUtil.calculateDiff(object : DiffUtil.Callback() {
-                    override fun getOldListSize() = reportList.size
-                    override fun getNewListSize() = newReportList.size
+                if (snapshot != null && !snapshot.isEmpty) {
+                    val newReportList = snapshot.toObjects(Report::class.java)
 
-                    override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-                        // Assuming each Report has a unique identifier
-                        return reportList[oldItemPosition].id == newReportList[newItemPosition].id
-                    }
+                    // Check for new or removed reports
+                    val diffResult = DiffUtil.calculateDiff(object : DiffUtil.Callback() {
+                        override fun getOldListSize() = reportList.size
+                        override fun getNewListSize() = newReportList.size
 
-                    override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-                        return reportList[oldItemPosition] == newReportList[newItemPosition]
-                    }
-                })
+                        override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+                            return reportList[oldItemPosition].id == newReportList[newItemPosition].id
+                        }
 
-                reportList.clear()
-                reportList.addAll(newReportList)
-                diffResult.dispatchUpdatesTo(adapter)
+                        override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+                            return reportList[oldItemPosition] == newReportList[newItemPosition]
+                        }
+                    })
 
-                binding.tvEmptyMessage.visibility = if (reportList.isEmpty()) View.VISIBLE else View.GONE
+                    // Update the list and notify the adapter with specific changes
+                    reportList.clear()
+                    reportList.addAll(newReportList)
+                    diffResult.dispatchUpdatesTo(adapter)
+                    binding.tvEmptyMessage.visibility = if (reportList.isEmpty()) View.VISIBLE else View.GONE
+                }
             }
-
-            override fun onCancelled(error: DatabaseError) {
-                Log.e("FetchReports", "Failed to fetch reports: ${error.message}")
-                Toast.makeText(this@MainActivity, "Failed to fetch reports", Toast.LENGTH_SHORT).show()
-            }
-        })
     }
-
 
 
 }

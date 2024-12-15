@@ -65,6 +65,8 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.ui.test.junit4)
+    androidTestImplementation(libs.espresso.core)
+    androidTestImplementation(libs.ext.junit)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
     implementation(platform(libs.firebase.bom))
@@ -84,6 +86,8 @@ dependencies {
     implementation(platform(libs.firebase.bom)) // Example version
     implementation(libs.androidx.recyclerview) // Use the latest version
     implementation(libs.firebase.auth.ktx)
+    implementation(libs.material.v1120)
+    implementation(libs.material.v190)
 
 
 
