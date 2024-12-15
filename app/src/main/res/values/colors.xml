@@ -7,13 +7,13 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="colorPrimary">#6200EE</color>
-    <color name="colorPrimaryDark">#3700B3</color>
-    <color name="colorAccent">#03DAC5</color>
+    <color name="colorPrimary">#00854d</color>
+    <color name="colorPrimaryDark">#063a24</color>
+    <color name="colorAccent">#c5af89</color>
     <color name="background_color">#F5F5F5</color>
     <color name="primary_text_color">#212121</color>
     <color name="secondary_text_color">#757575</color>
-    <color name="fab_color">#388E3C</color> <!-- Forest green -->
+    <color name="fab_color">#65baff</color> <!-- Forest green -->
     <color name="button_background_color">#388E3C</color> <!-- Forest green -->
     <color name="accent_color">#4CAF50</color> <!-- Vibrant green -->
     <color name="tertiary_text_color">#9E9E9E</color> <!-- Even lighter grey for location -->

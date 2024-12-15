@@ -27,18 +27,26 @@
     <string name="email_hint">Enter Email</string>
     <string name="password_hint">Enter Password</string>
     <string name="login">Login</string>
-    <string name="register">Register</string>
+    <string name="register">Sign In</string>
     <string name="description">Description</string>
-    <string name="deforestation_reports">Deforestation Reports</string>
+    <string name="deforestation_reports">Reports</string>
     <string name="track_and_report_deforestation">Track and report deforestation activities</string>
     <string name="report_deforestation">Report Deforestation</string>
     <string name="report_submission">Submit Deforestation Report</string>
     <string name="view_details">View Details</string>
-
-
-
-
-
-
-
+    <string name="report_image">Report Image</string>
+    <string name="report_title1">Report Title</string>
+    <string name="report_description1">Report Description</string>
+    <string name="comment_text">Comment text</string>
+    <string name="user_name">User Name</string>
+    <string name="timestamp">Timestamp</string>
+    <string name="user_comment">User: %1$s</string>
+    <string name="comment_timestamp">Posted on: %1$tF %1$tT</string>
+    <string name="report_title2">Report Title for ID: %1$s</string>
+    <string name="report_description2">Description of the report with ID: %1$s</string>
+    <string name="delete_comment">Delete Comment</string>
+    <string name="add_a_comment">Add a comment</string>
+    <string name="submit_comment">submit_comment</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="sign_in">SIGN IN</string>
 </resources>

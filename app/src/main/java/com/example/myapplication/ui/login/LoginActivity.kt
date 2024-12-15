@@ -39,6 +39,16 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun login(email: String, password: String) {
+        // Input validation
+        if (email.isEmpty()) {
+            binding.tilEmail?.error = "Email is required"
+            return
+        }
+        if (password.isEmpty()) {
+            binding.tilPassword?.error = "Password is required"
+            return
+        }
+
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
@@ -53,6 +63,16 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun register(email: String, password: String) {
+        // Input validation
+        if (email.isEmpty()) {
+            binding.tilEmail?.error = "Email is required"
+            return
+        }
+        if (password.isEmpty()) {
+            binding.tilPassword?.error = "Password is required"
+            return
+        }
+
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
