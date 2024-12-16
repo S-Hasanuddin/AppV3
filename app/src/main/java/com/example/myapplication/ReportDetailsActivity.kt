@@ -1,7 +1,6 @@
 package com.example.myapplication
 
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -29,10 +28,6 @@ class ReportDetailsActivity : AppCompatActivity() {
 
         db = FirebaseFirestore.getInstance()
         reportId = intent.getStringExtra("REPORT_ID") ?: ""
-        val intent = Intent(this, ReportDetailsActivity::class.java)
-        intent.putExtra("REPORT_ID", reportId) // Pass the reportId here
-        startActivity(intent)
-
 
         // Initialize RecyclerView
         val recyclerView: RecyclerView = findViewById(R.id.recyclerViewComments)
@@ -80,11 +75,6 @@ class ReportDetailsActivity : AppCompatActivity() {
                         commentList.add(it) }
                 }
             }
-            if (reportId.isEmpty()) {
-                Log.e("ReportDetails", "Report ID is empty, cannot fetch comments.")
-                return
-            }
-
     }
 
     private fun addComment(commentText: String) {
