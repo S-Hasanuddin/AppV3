@@ -1,3 +1,5 @@
+package com.example.myapplication
+
 import com.google.firebase.firestore.GeoPoint
 
 data class Report(

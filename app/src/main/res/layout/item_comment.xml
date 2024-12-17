@@ -5,29 +5,32 @@
     android:orientation="vertical"
     android:padding="8dp">
 
+    <!-- Display the user's name or email -->
     <TextView
         android:id="@+id/tvUserName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/user_name"
-        android:textStyle="bold"/>
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/user_name"
+    android:textStyle="bold"/>
 
+    <!-- Display the comment text -->
     <TextView
         android:id="@+id/tvCommentText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/comment_text"/>
+        android:text="@string/comment_text"  />
 
+    <!-- Display the timestamp of the comment -->
     <TextView
         android:id="@+id/tvTimestamp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/timestamp"
-        android:textSize="12sp"
-        android:textColor="@android:color/darker_gray"/>
+    android:textSize="12sp"
+    android:textColor="@android:color/darker_gray"/>
     <Button
         android:id="@+id/btnDeleteComment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/delete_comment" />
+        android:text="@string/delete" />
 </LinearLayout>

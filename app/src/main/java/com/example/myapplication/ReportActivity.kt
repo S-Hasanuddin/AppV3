@@ -18,11 +18,10 @@ import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
-import com.google.firebase.Firebase
 import com.google.firebase.firestore.FieldValue
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.GeoPoint
-import com.google.firebase.firestore.firestore
-import com.google.firebase.storage.storage
+import com.google.firebase.storage.FirebaseStorage
 import java.util.UUID
 import android.widget.ImageView as ImageView1
 
@@ -37,12 +36,15 @@ class ReportActivity : AppCompatActivity() {
     private var uploadedImageUri: Uri? = null
     private var userLocation: Location? = null
     private lateinit var activityResultLauncher: ActivityResultLauncher<Intent>
+    private lateinit var db: FirebaseFirestore
+    private lateinit var storage: FirebaseStorage
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_report)
-
+        db = FirebaseFirestore.getInstance()
+        storage = FirebaseStorage.getInstance()
         descriptionInput = findViewById(R.id.description_input)
         imagePreview = findViewById(R.id.image_preview)
         uploadImageButton = findViewById(R.id.upload_image_button)
@@ -55,9 +57,7 @@ class ReportActivity : AppCompatActivity() {
                 // Do something with the returned data
             }
         }
-
-        // Example button click to launch an activity
-        val button = findViewById<Button>(R.id.upload_image_button)
+        val button: Button = findViewById(R.id.button)
         button.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             activityResultLauncher.launch(intent)
@@ -89,7 +89,7 @@ class ReportActivity : AppCompatActivity() {
         submitReportButton.setOnClickListener {
             val description = descriptionInput.text.toString()
             if (description.isNotBlank() && (uploadedImageUri != null) && (userLocation != null)) {
-                uploadReport(description, uploadedImageUri!!, userLocation!!)
+                uploadReportWithCustomId(description, uploadedImageUri!!, userLocation!!)
             } else {
                 Toast.makeText(this, "Fill all fields!", Toast.LENGTH_SHORT).show()
             }
@@ -106,27 +106,6 @@ class ReportActivity : AppCompatActivity() {
         }
     }
 
-    private fun uploadReport(description: String, imageUri: Uri, location: Location) {
-        val storageRef = Firebase.storage.reference.child("images/${UUID.randomUUID()}.jpg")
-        storageRef.putFile(imageUri).addOnSuccessListener {
-            storageRef.downloadUrl.addOnSuccessListener { uri ->
-                val report = hashMapOf(
-                    "description" to description,
-                    "imageUrl" to uri.toString(),
-                    "location" to GeoPoint(location.latitude, location.longitude),
-                    "timestamp" to FieldValue.serverTimestamp()
-                )
-                Firebase.firestore.collection("reports").add(report).addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        Toast.makeText(this, "Report submitted!", Toast.LENGTH_SHORT).show()
-                        finish() // Close the activity
-                    } else {
-                        Toast.makeText(this, "Failed to submit report.", Toast.LENGTH_SHORT).show()
-                    }
-                }
-            }
-        }
-    }
     private fun checkLocationPermission() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
             != PackageManager.PERMISSION_GRANTED) {
@@ -176,6 +155,32 @@ class ReportActivity : AppCompatActivity() {
             } else {
                 // Permission denied, inform the user
                 Toast.makeText(this, "Location permission denied", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+    private fun uploadReportWithCustomId(description: String, imageUri: Uri, location: Location) {
+        val reportId = UUID.randomUUID().toString() // Generate a custom ID
+        val storageRef = storage.reference.child("images/$reportId.jpg")
+
+        storageRef.putFile(imageUri).addOnSuccessListener {
+            storageRef.downloadUrl.addOnSuccessListener { uri ->
+                val report = hashMapOf(
+                    "description" to description,
+                    "imageUrl" to uri.toString(),
+                    "location" to GeoPoint(location.latitude, location.longitude),
+                    "timestamp" to FieldValue.serverTimestamp(),
+                    "userId" to "user@example.com" // Replace with actual user ID
+                )
+
+                db.collection("reports").document(reportId).set(report)
+                    .addOnSuccessListener {
+                        Toast.makeText(this, "Report submitted with ID: $reportId", Toast.LENGTH_SHORT).show()
+                        finish() // Close the activity
+                    }
+                    .addOnFailureListener { e ->
+                        Toast.makeText(this, "Failed to submit report.", Toast.LENGTH_SHORT).show()
+                        e.printStackTrace()
+                    }
             }
         }
     }

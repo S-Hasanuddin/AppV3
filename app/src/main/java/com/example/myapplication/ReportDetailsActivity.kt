@@ -6,6 +6,7 @@ import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -29,6 +30,16 @@ class ReportDetailsActivity : AppCompatActivity() {
         db = FirebaseFirestore.getInstance()
         reportId = intent.getStringExtra("REPORT_ID") ?: ""
 
+        Log.d("ReportDetailsActivity", "Received report ID: $reportId") // Debug log
+
+        if (reportId.isEmpty()) {
+            Toast.makeText(this, "Invalid report ID", Toast.LENGTH_SHORT).show()
+            finish()
+            return
+        }
+
+        fetchReportById(reportId)
+
         // Initialize RecyclerView
         val recyclerView: RecyclerView = findViewById(R.id.recyclerViewComments)
         recyclerView.layoutManager = LinearLayoutManager(this)
@@ -37,7 +48,6 @@ class ReportDetailsActivity : AppCompatActivity() {
 
         // Fetch comments from Firestore
         fetchComments()
-
         // Handle add comment button click
         val btnAddComment: Button = findViewById(R.id.btnAddComment)
         btnAddComment.setOnClickListener {
@@ -50,7 +60,7 @@ class ReportDetailsActivity : AppCompatActivity() {
             }
             val tvReportTitle: TextView = findViewById(R.id.tvReportTitle)
             val tvReportDescription: TextView = findViewById(R.id.tvReportDescription)
-
+            fetchReportById(reportId)
             // Use the reportId to fetch the report details from Firestore or any data source
             // For example, set the title and description based on the reportId
             tvReportTitle.text = String.format(getString(R.string.report_title2), reportId)
@@ -130,5 +140,24 @@ class ReportDetailsActivity : AppCompatActivity() {
         // Format the timestamp using DateFormat and use the string resource with placeholders
         val formattedDate = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.SHORT).format(Date(comment.timestamp))
         timestampTextView.text = String.format(getString(R.string.comment_timestamp), formattedDate)
+    }
+    private fun fetchReportById(reportId: String) {
+        db.collection("reports").document(reportId).get()
+            .addOnSuccessListener { document ->
+                if (document.exists()) {
+                    val title = document.getString("title") ?: "No Title"
+                    val description = document.getString("description") ?: "No Description"
+                    findViewById<TextView>(R.id.tvReportTitle).text = title
+                    findViewById<TextView>(R.id.tvReportDescription).text = description
+                } else {
+                    Toast.makeText(this, "Report not found", Toast.LENGTH_SHORT).show()
+                    finish()
+                }
+            }
+            .addOnFailureListener { e ->
+                Toast.makeText(this, "Error fetching report", Toast.LENGTH_SHORT).show()
+                Log.e("ReportDetailsActivity", "Error fetching document", e)
+                finish()
+            }
     }
 }

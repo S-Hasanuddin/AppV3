@@ -1,71 +1,68 @@
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="16dp"
-    android:padding="16dp"
-    app:cardCornerRadius="12dp"
-    app:cardElevation="8dp"
-    android:backgroundTint="@android:color/white">
+    android:layout_margin="8dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="4dp">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="12dp">
 
-        <!-- Report Title -->
-        <TextView
-            android:id="@+id/tvReportTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:text="@string/report_title"
-            android:textColor="@color/primary_text_color"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <!-- Report Description -->
-
+        <!-- com.example.myapplication.Report Image -->
         <ImageView
             android:id="@+id/ivReportImage"
-            android:layout_width="350dp"
-            android:layout_height="350dp"
-            android:layout_marginBottom="12dp"
-            android:layout_marginEnd="12dp"
-            android:contentDescription="@string/report_image_description"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/report_image_placeholder"
             android:visibility="visible" />
 
+        <!-- com.example.myapplication.Report Title -->
+        <TextView
+            android:id="@+id/tvReportTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/report_title_placeholder"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:textColor="@android:color/black"
+            android:layout_marginTop="8dp" />
+
+        <!-- com.example.myapplication.Report Description -->
         <TextView
             android:id="@+id/tvReportDescription"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
-            android:text="@string/report_description"
-            android:textColor="@color/secondary_text_color"
-            android:textSize="16sp" />
+            android:text="@string/report_description_placeholder"
+            android:textSize="14sp"
+            android:textColor="@android:color/black"
+            android:layout_marginTop="4dp" />
 
-        <!-- Report Location -->
+        <!-- com.example.myapplication.Report Location -->
         <TextView
             android:id="@+id/tvReportLocation"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
-            android:text="@string/report_location"
-            android:textColor="@color/tertiary_text_color"
-            android:textSize="14sp" />
+            android:text="@string/report_location_placeholder"
+            android:textSize="12sp"
+            android:textColor="@android:color/darker_gray"
+            android:layout_marginTop="4dp" />
 
-        <!-- Report Image -->
-
-
-        <!-- Optional Button to View Details or Other Actions -->
+        <!-- View Details Button -->
         <Button
             android:id="@+id/btnViewReportDetails"
-            android:layout_width="300dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:backgroundTint="@color/button_background_color"
-            android:fontFamily="sans-serif-medium"
             android:text="@string/view_details"
+            android:layout_marginTop="8dp"
+            android:layout_gravity="end"
+            android:backgroundTint="@color/colorPrimary"
             android:textColor="@android:color/white" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>

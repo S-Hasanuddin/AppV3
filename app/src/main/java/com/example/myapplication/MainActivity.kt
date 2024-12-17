@@ -1,6 +1,5 @@
 package com.example.myapplication
 
-import Report
 import android.content.Intent
 import android.os.Bundle
 import android.os.StrictMode
@@ -62,7 +61,7 @@ class MainActivity : AppCompatActivity() {
         // Initialize report list and adapter
         reportList = mutableListOf()
         database = FirebaseDatabase.getInstance().getReference("reports")
-        adapter = ReportAdapter(reportList)
+        adapter = ReportAdapter(reportList, this)
 
         // Setup RecyclerView
         binding.reportsRecyclerView.layoutManager = LinearLayoutManager(this)
@@ -76,7 +75,7 @@ class MainActivity : AppCompatActivity() {
             Log.d("FABClick", "Navigating to ReportSubmissionActivity")
             startActivity(Intent(this, ReportSubmissionActivity::class.java))
         }
-        Log.d("RecyclerViewDebug", "Report list size: ${reportList.size}")
+        Log.d("RecyclerViewDebug", "com.example.myapplication.Report list size: ${reportList.size}")
         Log.d("RecyclerViewDebug", "Adapter item count: ${adapter.itemCount}")
 
     }

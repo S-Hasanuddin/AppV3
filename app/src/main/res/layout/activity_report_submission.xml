@@ -86,7 +86,7 @@
             android:fontFamily="sans-serif-medium"
             android:layout_marginBottom="12dp" />
 
-        <!-- Submit Report Button -->
+        <!-- Submit com.example.myapplication.Report Button -->
         <Button
             android:id="@+id/btnSubmitReport"
             android:layout_width="match_parent"

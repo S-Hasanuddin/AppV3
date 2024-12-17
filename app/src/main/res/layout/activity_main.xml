@@ -64,6 +64,6 @@
         android:layout_margin="16dp"
         android:contentDescription="@string/add_report"
         android:src="@android:drawable/ic_input_add"
-        app:backgroundTint="@color/fab_color"
+        app:backgroundTint="@color/accent_color"
         app:tint="@android:color/white" />
 </RelativeLayout>

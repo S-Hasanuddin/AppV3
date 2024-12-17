@@ -1,50 +1,47 @@
 package com.example.myapplication
 
-import Report
+import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.myapplication.databinding.ItemReportBinding
 
-
-class ReportAdapter(private val reportList: List<Report>) :
+class ReportAdapter(private val reports: List<Report>, private val context: Context) :
     RecyclerView.Adapter<ReportAdapter.ReportViewHolder>() {
 
-    class ReportViewHolder(private val binding: ItemReportBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-
-        fun bind(report: Report) {
-            binding.tvReportTitle.text = report.title
-            binding.tvReportDescription.text = report.description
-
-            // Convert GeoPoint to String
-            val locationString = report.location?.let {
-                "Lat: ${it.latitude}, Lon: ${it.longitude}"
-            } ?: "Unknown Location"
-            binding.tvReportLocation.text = locationString
-
-            // Load image
-            Glide.with(binding.root.context)
-                .load(report.imageUrl)
-                .into(binding.ivReportImage)
-            binding.btnViewReportDetails.setOnClickListener {
-                // Handle the button click, e.g., open a new activity or show details
-                val intent = Intent(binding.root.context, ReportDetailsActivity::class.java)
-                intent.putExtra("REPORT_ID", report.id)  // Pass the report ID or other data
-                binding.root.context.startActivity(intent)
-            }
-        }
-    }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReportViewHolder {
-        val binding =
-            ItemReportBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return ReportViewHolder(binding)
+        val view = LayoutInflater.from(context).inflate(R.layout.item_report, parent, false)
+        return ReportViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ReportViewHolder, position: Int) {
-        holder.bind(reportList[position])
+        val report = reports[position]
+        holder.title.text = report.title
+        holder.description.text = report.description
+        Log.d("ReportAdapter", "Passing report ID: ${report.id}")
+        Glide.with(holder.itemView.context)
+            .load(report.imageUrl) // Use the correct field from your Firestore data // Optional placeholder image // Optional error image
+            .into(holder.imageView)
+        holder.btnViewDetails.setOnClickListener {
+            val intent = Intent(context, ReportDetailsActivity::class.java)
+            intent.putExtra("REPORT_ID", report.id)
+            Log.d("ReportAdapter", "Passing report ID: ${report.id}")// Pass report ID
+            holder.itemView.context.startActivity(intent)
+        }
     }
-    override fun getItemCount(): Int = reportList.size
+
+    override fun getItemCount(): Int = reports.size
+
+    class ReportViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val title: TextView = itemView.findViewById(R.id.tvReportTitle)
+        val description: TextView = itemView.findViewById(R.id.tvReportDescription)
+        val imageView: ImageView = itemView.findViewById(R.id.ivReportImage)
+        val btnViewDetails: Button = itemView.findViewById(R.id.btnViewReportDetails)
+    }
 }

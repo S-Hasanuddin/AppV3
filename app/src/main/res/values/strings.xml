@@ -29,16 +29,31 @@
     <string name="login">Login</string>
     <string name="register">Register</string>
     <string name="description">Description</string>
-    <string name="deforestation_reports">Deforestation Reports</string>
+    <string name="deforestation_reports">Reports</string>
     <string name="track_and_report_deforestation">Track and report deforestation activities</string>
     <string name="report_deforestation">Report Deforestation</string>
     <string name="report_submission">Submit Deforestation Report</string>
     <string name="view_details">View Details</string>
-
-
-
-
-
+    <string name="comment_text">Comment text</string>
+    <string name="user_name">User Name</string>
+    <string name="timestamp">Timestamp</string>
+    <string name="delete_comment">Delete Comment</string>
+    <string name="report_title1">Report Title\n</string>
+    <string name="report_description1">Description</string>
+    <string name="add_a_comment">Add Comment</string>
+    <string name="submit_comment">Submit</string>
+    <string name="report_title2">Report Title for ID: %1$s</string>
+    <string name="report_description2">Description of the report with ID: %1$s</string>
+    <string name="user_comment">User: %1$s</string>
+    <string name="comment_timestamp">Posted on: %1$tF %1$tT</string>
+    <string name="post_comment">Post Comment</string>
+    <string name="delete">Delete</string>
+    <string name="report_image_placeholder">Report Image</string>
+    <string name="report_title_placeholder">Report Title</string>
+    <string name="report_description_placeholder">This is a description of the report.</string>
+    <string name="report_location_placeholder">Location: Unknown</string>
+    <string name="go_to_main_activity">Go to Main Activity</string>
+    <string name="additional_details_will_go_here">Additional details will go here.</string>
 
 
 </resources>

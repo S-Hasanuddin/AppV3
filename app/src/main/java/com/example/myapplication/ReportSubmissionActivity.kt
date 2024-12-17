@@ -115,8 +115,8 @@ class ReportSubmissionActivity : AppCompatActivity() {
         firestore.collection("reports")
             .add(report)
             .addOnSuccessListener {
-                Log.d("Firestore", "Report uploaded successfully: ${it.id}")
-                Toast.makeText(this, "Report submitted!", Toast.LENGTH_SHORT).show()
+                Log.d("Firestore", "com.example.myapplication.Report uploaded successfully: ${it.id}")
+                Toast.makeText(this, "com.example.myapplication.Report submitted!", Toast.LENGTH_SHORT).show()
             }
             .addOnFailureListener { e ->
                 Log.e("Firestore", "Error uploading report", e)
